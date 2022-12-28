@@ -8,9 +8,9 @@ public class Minesweeper {
 
     public static void main(String[] args) {
         int[] info = {9, 9, 0}; //default
-        info = askInfo(info);
+        info = askInfo(info);  //taking starting conditions from user, currently set at default
         Map map = new Map(info);
-        displayMap(map);
+        displayMap(map);  //the map is drawn once before the main game starts
         playGame(map);
     }
 
@@ -28,7 +28,9 @@ public class Minesweeper {
         return info;
     }
 
-    //method displayMap
+    //method to draw out the map at any stage of the game
+    //Takes values at every point and prints either a ".", "*", "/" or a "x"
+    //values are incorperated within the class 'map' itself
     public static void displayMap(Map map) {
         System.out.println();
         System.out.println(" | 1 2 3 4 5 6 7 8 9 |");
@@ -56,7 +58,7 @@ public class Minesweeper {
         System.out.println("-| - - - - - - - - - |");
     }
 
-    //method addMines
+    //method to add mines to the field 
     public static void addMines(Map map) {
         Random random = new Random();
         int m = map.info[2];
@@ -111,6 +113,7 @@ public class Minesweeper {
     }
 
     //method playGame
+    //This is the main loop of the game, 
     public static void playGame(Map map) {
         Scanner scan = new Scanner(System.in);
         addMines(map);
@@ -204,6 +207,10 @@ public class Minesweeper {
         return true;
     }
 
+    
+    //The main object of the game, the class contains the information of the board at any given time
+    //the field arrary contains values that are shown on the display
+    //Field2 shows where the bombs are located after intial 
     static class Map {
         final int[] info;
         int[][] field;
