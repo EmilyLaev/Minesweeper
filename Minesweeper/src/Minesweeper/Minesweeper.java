@@ -14,7 +14,7 @@ public class Minesweeper {
         playGame(map);
     }
 
-    //method AskInfo
+    //This method asks for the dimension of the field and the number of mines
     public static int[] askInfo(int[] info) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter dimensions of field:");
@@ -58,7 +58,7 @@ public class Minesweeper {
         System.out.println("-| - - - - - - - - - |");
     }
 
-    //method to add mines to the field 
+    //method to add mines to the field, they are placed randomly and checked to ensure no spot has more than one mine 
     public static void addMines(Map map) {
         Random random = new Random();
         int m = map.info[2];
@@ -82,7 +82,7 @@ public class Minesweeper {
         }
     }
 
-    //method checkForMines
+    // This method checks if any of the mines have ben hit
     public static void checkForMines(Map map) {
         for (int i = 0; i < map.height; i++) {
             for (int j = 0; j < map.width; j++) {
@@ -94,7 +94,7 @@ public class Minesweeper {
         }
     }
 
-    //method minesAtPoint
+    //This method finds how many mines are next to a specific point (0-8)
     public static int minesAtPoint(Map map, int t, int s) {
         int count = 0;
         for (int i = 0; i < 3; i++) {
@@ -113,7 +113,9 @@ public class Minesweeper {
     }
 
     //method playGame
-    //This is the main loop of the game, 
+    //This is the main loop of the game, each iteration allows the player
+    //to select a point on the map and checks if they have hit a mine
+    //Loop is broken if all non-mine spots have been selected or a mine has been hit
     public static void playGame(Map map) {
         Scanner scan = new Scanner(System.in);
         addMines(map);
@@ -135,7 +137,8 @@ public class Minesweeper {
         }
     }
 
-    //method exploreMap
+    //This method displays all the empty spaces and connected numbered spaces
+    //around a selected point, the map values are updated
     public static void isFree(Map map, int h, int w) {
         if (!map.field3[h][w]) {
             map.field2[h][w] = true;
@@ -158,11 +161,13 @@ public class Minesweeper {
         }
     }
 
+    //This method marks 
     public static void markMine(Map map, int h, int w) {
         map.field3[h][w] = !map.field3[h][w];
     }
 
-    //method winConditions
+    //method checks if the win conditions have been met
+    //this means all non-mine spots have been selected or revealed by user
     public static boolean winConditions(boolean gameOn, Map map) {
         if (gameOn) {
             int count3 = 0;
@@ -197,6 +202,7 @@ public class Minesweeper {
         }
     }
 
+    //This method finds if any of the mines have been tiggered
     public static boolean mineTriggered(Map map) {
         for (int i = 0; i < map.info[2]; i++) {
             if ((map.field2[map.mines[i][0]][map.mines[i][1]] && !map.field3[map.mines[i][0]][map.mines[i][1]])) {
@@ -210,7 +216,8 @@ public class Minesweeper {
     
     //The main object of the game, the class contains the information of the board at any given time
     //the field arrary contains values that are shown on the display
-    //Field2 shows where the bombs are located after intial 
+    //Field2 shows if a bomb is located at a spot
+    //Field3 shows if a spot has been revealed or not
     static class Map {
         final int[] info;
         int[][] field;
