@@ -114,6 +114,7 @@ public class Minesweeper {
 
     //method playGame
     //This is the main loop of the game, each iteration allows the player
+    //The main map and field are already set
     //to select a point on the map and checks if they have hit a mine
     //Loop is broken if all non-mine spots have been selected or a mine has been hit
     public static void playGame(Map map) {
