@@ -10,7 +10,7 @@ public class Minesweeper {
         int[] info = {9, 9, 0}; //default
         info = askInfo(info);  //taking starting conditions from user, currently set at default
         Map map = new Map(info);
-        displayMap(map);  //the map is drawn once before the main game starts
+        displayMap(map);  //the map is drawn once before the main game starts.
         playGame(map);
     }
 
